@@ -1,0 +1,263 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-gradient: linear-gradient(125deg, #1e1e2f, #3a2f5f, #2c5364);
+    --card: rgba(255,255,255,0.1);
+    --button: #444;
+    --button-hover: #666;
+    --text: white;
+    --focus-ring: rgba(100, 180, 255, 0.7);
+}
+
+.light-mode {
+    --bg-gradient: linear-gradient(125deg, #f8f9fa, #e9ecef, #dee2e6);
+    --card: rgba(0,0,0,0.05);
+    --button: #dddddd;
+    --button-hover: #cccccc;
+    --text: #222;
+    --focus-ring: rgba(0, 90, 200, 0.6);
+}
+
+
+
+body {
+    margin: 0;
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: var(--text);
+}
+
+/* ===== FOCUS-VISIBLE ACCESSIBILITY ===== */
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.app {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.calculator {
+    background: var(--card);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    width: 320px;
+}
+
+#display {
+    width: 100%;
+    height: 55px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: right;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text);
+    transition: all 0.15s ease;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Keyboard shortcut tooltip on hover */
+button[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(4px);
+}
+
+.zero {
+    grid-column: span 2;
+}
+
+/* ===== HISTORIAL ===== */
+
+.history {
+    width: 250px;
+    height: 400px;
+    background: var(--card);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-header h3 {
+    color: var(--text);
+    margin: 0;
+}
+
+#history-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-right: 5px;
+    list-style: none;
+    padding-left: 0;
+}
+
+#history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#history-list::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+
+.history li,
+.history-item {
+    margin-bottom: 8px;
+    font-size: 14px;
+    opacity: 0.8;
+    cursor: pointer;
+    color: var(--text);
+}
+
+/* Slide-in animation for history items */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 0.8;
+        transform: translateX(0);
+    }
+}
+
+.history-item {
+    animation: slideIn 0.3s ease forwards;
+    opacity: 0;
+}
+
+#clear-history {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: #aa3333;
+    color: white;
+    font-size: 13px;
+    height: auto;
+    box-shadow: none;
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* ===== MOBILE HISTORY TOGGLE ===== */
+
+#history-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 20px;
+    z-index: 200;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    line-height: 48px;
+    text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+    .app {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .calculator {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .history {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        z-index: 150;
+        padding: 60px 20px 20px;
+        background: var(--card);
+        backdrop-filter: blur(20px);
+    }
+
+    .history--open {
+        display: flex;
+    }
+
+    #history-toggle {
+        display: block;
+    }
+}
