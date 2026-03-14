@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Vibe</title>
+  <script type="module" crossorigin src="/calculadora-vibe/assets/index-DuA7QB_0.js"></script>
+  <link rel="stylesheet" crossorigin href="/calculadora-vibe/assets/index-z4smGt6D.css">
+</head>
+<body>
+
+<button id="theme-toggle" aria-label="Cambiar tema">🌙</button>
+<button id="history-toggle" aria-label="Mostrar historial" aria-expanded="false">📜</button>
+
+<div class="app">
+
+    <div class="calculator">
+        <input type="text" id="display" disabled aria-label="Pantalla de la calculadora">
+
+        <div class="buttons">
+            <button data-action="clear" aria-label="Limpiar (Escape)" title="Escape">C</button>
+            <button data-value="/" aria-label="Dividir (/)" title="/">/</button>
+            <button data-value="*" aria-label="Multiplicar (*)" title="*">*</button>
+            <button data-action="delete" aria-label="Borrar último (Backspace)" title="Backspace">⌫</button>
+
+            <button data-value="7" aria-label="7" title="7">7</button>
+            <button data-value="8" aria-label="8" title="8">8</button>
+            <button data-value="9" aria-label="9" title="9">9</button>
+            <button data-value="-" aria-label="Restar (-)" title="-">-</button>
+
+            <button data-value="4" aria-label="4" title="4">4</button>
+            <button data-value="5" aria-label="5" title="5">5</button>
+            <button data-value="6" aria-label="6" title="6">6</button>
+            <button data-value="+" aria-label="Sumar (+)" title="+">+</button>
+
+            <button data-value="1" aria-label="1" title="1">1</button>
+            <button data-value="2" aria-label="2" title="2">2</button>
+            <button data-value="3" aria-label="3" title="3">3</button>
+            <button data-action="calculate" aria-label="Calcular (Enter)" title="Enter">=</button>
+
+            <button data-value="0" class="zero" aria-label="0" title="0">0</button>
+            <button data-value="." aria-label="Punto decimal (.)" title=".">.</button>
+            <button data-value="%" aria-label="Porcentaje (%)" title="%">%</button>
+        </div>
+    </div>
+
+    <div class="history">
+        <div class="history-header">
+            <h3>Historial</h3>
+            <button id="clear-history" aria-label="Limpiar historial">Limpiar</button>
+        </div>
+        <ul id="history-list"></ul>
+    </div>
+
+</div>
+
+</body>
+</html>
